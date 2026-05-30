@@ -549,7 +549,14 @@ function buildCoaching(s) {
       "Light movement after meals — even 10 to 20 minutes of walking — may significantly reduce blood sugar spikes."
     );
   }
-  return notes.join(" ");
+  
+  const baseNotes = notes.slice(0, 2);
+  const extraNotes = notes.slice(2);
+  const randomExtra = extraNotes.length
+  ? extraNotes[Math.floor(Math.random() * extraNotes.length)]
+  : null;
+
+return [...baseNotes, randomExtra].filter(Boolean).join(" ");
 }
 
 function getDailyLabel(score) {
