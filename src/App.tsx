@@ -549,7 +549,7 @@ function buildCoaching(s) {
       "Light movement after meals — even 10 to 20 minutes of walking — may significantly reduce blood sugar spikes."
     );
   }
-  
+
   const baseNotes = notes.slice(0, 2);
   const extraNotes = notes.slice(2);
   const randomExtra = extraNotes.length
@@ -619,7 +619,7 @@ const S = {
   metricGrid: { display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8, margin: "1rem 0" },
   twoCol: {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
+    gridTemplateColumns: window.innerWidth < 800 ? "1fr" : "1fr 1fr",
     gap: 16,
     alignItems: "start",
   },
@@ -1115,6 +1115,15 @@ export default function App() {
               </div>
             </div>
           </div>
+
+          {/* COACHING */}
+          <div style={S.card}>
+            <div style={S.cardTitle}>Coach's notes</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#4A90D9", background: "#EBF4FF", borderRadius: 8, padding: "3px 10px", display: "inline-block", marginBottom: 10 }}>
+              💡 Personalized insight
+            </div>
+            <div style={S.coaching}>{buildCoaching(reportAnalysis)}</div>
+          </div>
           </div>
 
 <div style={S.rightCol}>
@@ -1160,14 +1169,7 @@ export default function App() {
             </PressBtn>
           </div>
 
-          {/* COACHING */}
-          <div style={S.card}>
-            <div style={S.cardTitle}>Coach's notes</div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#4A90D9", background: "#EBF4FF", borderRadius: 8, padding: "3px 10px", display: "inline-block", marginBottom: 10 }}>
-              💡 Personalized insight
-            </div>
-            <div style={S.coaching}>{buildCoaching(reportAnalysis)}</div>
-          </div>
+        
           </div>
       </div>
       )}
