@@ -332,57 +332,22 @@ const FOOD_DB = [
 { id: 289, name: "Chow mein", carbs: 55, protein: 12, fat: 10, satFat: 2, fiber: 3, sugar: 5, gi: 65, category: "mixed" },
 { id: 290, name: "Pad see ew", carbs: 60, protein: 15, fat: 12, satFat: 3, fiber: 3, sugar: 6, gi: 65, category: "mixed" },
 { id: 291, name: "Meatloaf", carbs: 15, protein: 25, fat: 18, satFat: 7, fiber: 1, sugar: 6, gi: 55, category: "mixed", locked: true },
+
 // Chick-fil-A
-{
-  name: "Chick-fil-A Chicken Sandwich",
-  carbs: 41, protein: 29, fat: 18, satFat: 3.5, fiber: 1, sugar: 6, gi: 68
-},
-{
-  name: "Chick-fil-A Spicy Chicken Sandwich",
-  carbs: 45, protein: 28, fat: 19, satFat: 4, fiber: 1, sugar: 6, gi: 70
-},
-{
-  name: "Chick-fil-A Grilled Chicken Sandwich",
-  carbs: 45, protein: 28, fat: 11, satFat: 2.5, fiber: 3, sugar: 11, gi: 60
-},
-{
-  name: "Chick-fil-A 12 Count Nuggets",
-  carbs: 16, protein: 40, fat: 17, satFat: 3.5, fiber: 0, sugar: 1, gi: 20
-},
-{
-  name: "Chick-fil-A Cobb Salad",
-  carbs: 13, protein: 42, fat: 31, satFat: 8, fiber: 4, sugar: 7, gi: 15
-},
-{
-  name: "Chick-fil-A Market Salad",
-  carbs: 24, protein: 28, fat: 13, satFat: 2.5, fiber: 5, sugar: 14, gi: 30
-},
+{ id: 292, name: "Chick-fil-A Chicken Sandwich", carbs: 41, protein: 29, fat: 18, satFat: 3.5, fiber: 1, sugar: 6, gi: 68, category: "mixed", locked: true, keywords: ["chick-fil-a", "chickfila", "chick fil a"] },
+{ id: 293, name: "Chick-fil-A Spicy Chicken Sandwich", carbs: 45, protein: 28, fat: 19, satFat: 4, fiber: 1, sugar: 6, gi: 70, category: "mixed", locked: true, keywords: ["chick-fil-a", "chickfila", "spicy chicken"] },
+{ id: 294, name: "Chick-fil-A Grilled Chicken Sandwich", carbs: 45, protein: 28, fat: 11, satFat: 2.5, fiber: 3, sugar: 11, gi: 60, category: "mixed", locked: true, keywords: ["chick-fil-a", "chickfila", "grilled chicken"] },
+{ id: 295, name: "Chick-fil-A 12 Count Nuggets", carbs: 16, protein: 40, fat: 17, satFat: 3.5, fiber: 0, sugar: 1, gi: 20, category: "mixed", locked: true, keywords: ["chick-fil-a", "chickfila", "nuggets"] },
+{ id: 296, name: "Chick-fil-A Cobb Salad", carbs: 13, protein: 42, fat: 31, satFat: 8, fiber: 4, sugar: 7, gi: 15, category: "mixed", locked: true, keywords: ["chick-fil-a", "chickfila", "cobb salad"] },
+{ id: 297, name: "Chick-fil-A Market Salad", carbs: 24, protein: 28, fat: 13, satFat: 2.5, fiber: 5, sugar: 14, gi: 30, category: "mixed", locked: true, keywords: ["chick-fil-a", "chickfila", "market salad"] },
 
 // McDonald's
-{
-  name: "McDonald's Big Mac",
-  carbs: 45, protein: 26, fat: 34, satFat: 11, fiber: 3, sugar: 9, gi: 65
-},
-{
-  name: "McDonald's Quarter Pounder with Cheese",
-  carbs: 42, protein: 30, fat: 26, satFat: 12, fiber: 2, sugar: 10, gi: 65
-},
-{
-  name: "McDonald's McChicken",
-  carbs: 40, protein: 14, fat: 21, satFat: 3.5, fiber: 2, sugar: 5, gi: 68
-},
-{
-  name: "McDonald's Filet-O-Fish",
-  carbs: 39, protein: 16, fat: 19, satFat: 4, fiber: 2, sugar: 5, gi: 65
-},
-{
-  name: "McDonald's 10 Piece McNuggets",
-  carbs: 26, protein: 24, fat: 24, satFat: 4, fiber: 1, sugar: 0, gi: 30
-},
-{
-  name: "McDonald's Egg McMuffin",
-  carbs: 30, protein: 17, fat: 13, satFat: 6, fiber: 2, sugar: 3, gi: 55
-},
+{ id: 298, name: "McDonald's Big Mac", carbs: 45, protein: 26, fat: 34, satFat: 11, fiber: 3, sugar: 9, gi: 65, category: "mixed", locked: true, keywords: ["mcdonalds", "mcdonald's", "big mac"] },
+{ id: 299, name: "McDonald's Quarter Pounder with Cheese", carbs: 42, protein: 30, fat: 26, satFat: 12, fiber: 2, sugar: 10, gi: 65, category: "mixed", locked: true, keywords: ["mcdonalds", "mcdonald's", "quarter pounder"] },
+{ id: 300, name: "McDonald's McChicken", carbs: 40, protein: 14, fat: 21, satFat: 3.5, fiber: 2, sugar: 5, gi: 68, category: "mixed", locked: true, keywords: ["mcdonalds", "mcdonald's", "mcchicken"] },
+{ id: 301, name: "McDonald's Filet-O-Fish", carbs: 39, protein: 16, fat: 19, satFat: 4, fiber: 2, sugar: 5, gi: 65, category: "mixed", locked: true, keywords: ["mcdonalds", "mcdonald's", "filet o fish"] },
+{ id: 302, name: "McDonald's 10 Piece McNuggets", carbs: 26, protein: 24, fat: 24, satFat: 4, fiber: 1, sugar: 0, gi: 30, category: "mixed", locked: true, keywords: ["mcdonalds", "mcdonald's", "mcnuggets", "nuggets"] },
+{ id: 303, name: "McDonald's Egg McMuffin", carbs: 30, protein: 17, fat: 13, satFat: 6, fiber: 2, sugar: 3, gi: 55, category: "mixed", locked: true, keywords: ["mcdonalds", "mcdonald's", "egg mcmuffin"] },
 
 // Chipotle
 {
