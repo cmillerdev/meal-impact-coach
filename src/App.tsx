@@ -507,16 +507,20 @@ function getEatingOrder(items) {
 
 function getImprovements(s, items) {
   const imps = [];
+
   if (s.t.protein < 20)
     imps.push({ label: "Add protein", detail: "Chicken, eggs, fish, or Greek yogurt", proj: Math.min(10, r1(s.meal + 0.9)) });
+
   if (s.t.fiber < 5)
     imps.push({ label: "Start with fiber", detail: "Side salad, broccoli, or beans before the main", proj: Math.min(10, r1(s.meal + 0.7)) });
-  if (s.spike <= 5 && items.length > 1)
+
+  if (items.length > 1)
     imps.push({ label: "Eat in the suggested order", detail: "Vegetables → protein → starches last", proj: Math.min(10, r1(s.meal + 0.8)) });
+
   imps.push({ label: "Walk 15 min after eating", detail: "Light activity helps your body clear glucose", proj: Math.min(10, r1(s.meal + 0.6)) });
+
   return imps;
 }
-
 function buildCoaching(s) {
   const notes = [];
   if (s.spikeLabel === "Poor") notes.push("This meal is more likely to cause a sharper blood sugar rise due to its carb and sugar load.");
