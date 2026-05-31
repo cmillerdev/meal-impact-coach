@@ -640,7 +640,15 @@ function getBadgeDefs(strongDays, streak, trackedDays) {
 
 // ─── STYLES ───────────────────────────────────────────────────────────────────
 const S = {
-  shell: { fontFamily: "'DM Sans', system-ui, sans-serif", maxWidth: 1180, margin: "0 auto", padding: "1.5rem 1rem", color: "#1a1a1a" },
+  shell: {
+    fontFamily: "'DM Sans', system-ui, sans-serif",
+    maxWidth: 1180,
+    minHeight: "100vh",
+    margin: "0 auto",
+    padding: "1.5rem 1rem",
+    color: "#1a1a1a",
+    background: "#f3f4f6"
+  },
   card: { background: "#fff", border: "1px solid #e8e8e8", borderRadius: 14, padding: "1.25rem", marginBottom: "1rem", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" },
   cardTitle: { fontSize: 17, fontWeight: 600, color: "#111", marginBottom: 3 },
   cardSub: { fontSize: 13, color: "#777", marginBottom: "1rem" },
