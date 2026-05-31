@@ -565,6 +565,40 @@ function getDailyLabel(score) {
   return "Poor";
 }
 
+function getAverageForRange(dayAvgs, daysBack, offset = 0) {
+  const today = new Date();
+  const start = new Date();
+  start.setDate(today.getDate() - daysBack - offset + 1);
+
+  const end = new Date();
+  end.setDate(today.getDate() - offset);
+
+  const inRange = dayAvgs.filter((d) => {
+    const date = new Date(d.date + "T00:00:00");
+    return date >= start && date <= end;
+  });
+
+  if (!inRange.length) return null;
+
+  return r1(inRange.reduce((sum, d) => sum + d.avg, 0) / inRange.length);
+}
+
+function getTrend(current, previous) {
+  if (current === null || previous === null) return null;
+
+  const diff = r1(current - previous);
+
+  if (Math.abs(diff) < 0.1) {
+    return { arrow: "→", text: "Stable", diff };
+  }
+
+  if (diff > 0) {
+    return { arrow: "▲", text: `Up ${diff}`, diff };
+  }
+
+  return { arrow: "▼", text: `Down ${Math.abs(diff)}`, diff };
+}
+
 // ─── BADGE CONFIG ─────────────────────────────────────────────────────────────
 function computeStats(savedMeals) {
   const byDay = {};
@@ -854,8 +888,18 @@ export default function App() {
   const yd = yesterdayStr();
   const todaysMeals = savedMeals.filter((m) => m.date === td);
   const yesterdaysMeals = savedMeals.filter((m) => m.date === yd);
+  
   const todayAvg = todaysMeals.length ? r1(todaysMeals.reduce((a, m) => a + m.score, 0) / todaysMeals.length) : null;
   const yestAvg = yesterdaysMeals.length ? r1(yesterdaysMeals.reduce((a, m) => a + m.score, 0) / yesterdaysMeals.length) : null;
+  
+  const avg7 = getAverageForRange(dayAvgs, 7);
+  const prevAvg7 = getAverageForRange(dayAvgs, 7, 7);
+  const trend7 = getTrend(avg7, prevAvg7);
+  
+  const avg30 = getAverageForRange(dayAvgs, 30);
+  const prevAvg30 = getAverageForRange(dayAvgs, 30, 30);
+  const trend30 = getTrend(avg30, prevAvg30);
+  
   const bestToday = todaysMeals.length ? todaysMeals.reduce((b, m) => m.score > b.score ? m : b) : null;
   const worstToday = todaysMeals.length ? todaysMeals.reduce((b, m) => m.score < b.score ? m : b) : null;
 
@@ -1190,6 +1234,42 @@ export default function App() {
                 </span>
               </div>
             )}
+            <div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: 8,
+    marginTop: 12
+  }}
+>
+  <div style={{ background: "#f8f8f8", borderRadius: 10, padding: 10 }}>
+    <div style={{ fontSize: 11, color: "#aaa", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 4 }}>
+      7-day average
+    </div>
+    <div style={{ fontSize: 22, fontWeight: 700, color: avg7 !== null ? scoreColor(avg7) : "#aaa" }}>
+      {avg7 !== null ? avg7 : "—"}
+    </div>
+    {trend7 && (
+      <div style={{ fontSize: 12, fontWeight: 600, color: trend7.diff >= 0 ? "#0F6E56" : "#C0392B" }}>
+        {trend7.arrow} {trend7.text}
+      </div>
+    )}
+  </div>
+
+  <div style={{ background: "#f8f8f8", borderRadius: 10, padding: 10 }}>
+    <div style={{ fontSize: 11, color: "#aaa", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 4 }}>
+      30-day average
+    </div>
+    <div style={{ fontSize: 22, fontWeight: 700, color: avg30 !== null ? scoreColor(avg30) : "#aaa" }}>
+      {avg30 !== null ? avg30 : "—"}
+    </div>
+    {trend30 && (
+      <div style={{ fontSize: 12, fontWeight: 600, color: trend30.diff >= 0 ? "#0F6E56" : "#C0392B" }}>
+        {trend30.arrow} {trend30.text}
+      </div>
+    )}
+  </div>
+</div>
             <div style={S.dailyGrid}>
               {bestToday && <div style={{ background: "#f8f8f8", borderRadius: 10, padding: 10 }}>
                 <div style={{ fontSize: 11, color: "#aaa", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 4 }}>Best meal</div>
