@@ -946,17 +946,56 @@ export default function App() {
 
   function saveSuggestion(imp) {
     if (!reportAnalysis) return;
-    const name = mealItems.length ? mealItems.map((f) => f.name).join(", ") : lastMealName;
-    persistSave({ id: Date.now(), name: `💡 ${name} + ${imp.label}`, score: imp.proj, date: td, items: mealItems.length ? [...mealItems] : [], type: "suggestion" });
+  
+    const name = mealItems.length
+      ? mealItems.map((f) => f.name).join(", ")
+      : lastMealName;
+  
+    persistSave({
+      id: Date.now(),
+      name: `💡 ${name} + ${imp.label}`,
+      score: imp.proj,
+      date: td,
+      items: mealItems.length ? [...mealItems] : [],
+      type: "suggestion"
+    });
+  
+    setMealItems([]);
     showToast(`Suggestion saved: ${imp.label}`);
   }
-
+  
   function saveAllSuggestions() {
     if (!reportAnalysis) return;
-    const imps = getImprovements(reportAnalysis, mealItems.length ? mealItems : []);
-    const best = Math.min(10, r1(Math.max(...imps.map((i) => i.proj)) + 0.3));
-    const name = mealItems.length ? mealItems.map((f) => f.name).join(", ") : lastMealName;
-    persistSave({ id: Date.now(), name: `🌟 ${name} (all improvements)`, score: best, date: td, items: mealItems.length ? [...mealItems] : [], type: "plan" });
+  
+    const imps = getImprovements(
+      reportAnalysis,
+      mealItems.length ? mealItems : []
+    );
+  
+    const best = imps.length
+      ? Math.min(
+          10,
+          r1(
+            Math.max(...imps.map((i) => i.proj)) +
+              (imps.length > 1 ? 0.3 : 0)
+          )
+        )
+      : reportAnalysis.meal;
+  
+    const name = mealItems.length
+      ? mealItems.map((f) => f.name).join(", ")
+      : lastMealName;
+  
+    persistSave({
+      id: Date.now(),
+      name: `🌟 ${name} (all improvements)`,
+      score: best,
+      date: td,
+      items: mealItems.length ? [...mealItems] : [],
+      type: "plan"
+    });
+  
+    setMealItems([]);
     showToast("All suggestions saved as a plan!");
   }
 
