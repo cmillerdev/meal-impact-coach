@@ -1338,37 +1338,6 @@ export default function App() {
         )}
       </div>
 
-      {/* MEAL HISTORY */}
-      <div style={S.card}>
-        <div style={S.cardTitle}>Meal history</div>
-        <div style={S.cardSub}>All saved meals with date and score</div>
-        {savedMeals.length === 0 ? (
-          <div style={S.emptyBox}>No saved meals yet</div>
-        ) : (
-          <>
-            {(showAllHistory ? savedMeals : savedMeals.slice(0, 4)).map((meal) => (
-              <div key={meal.id} style={S.histItem}>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: "#111", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{meal.name}</div>
-                  <div style={{ fontSize: 11, color: "#aaa" }}>
-                    {meal.date} · <span style={{ color: scoreColor(meal.score), fontWeight: 600 }}>{meal.score} — {getDailyLabel(meal.score)}</span>
-                  </div>
-                </div>
-                <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
-                  <PressBtn style={S.btnLoad} onClick={() => loadMeal(meal)}>Load</PressBtn>
-                  <PressBtn style={S.btnDanger} onClick={() => deleteMeal(meal.id)}>Delete</PressBtn>
-                </div>
-              </div>
-            ))}
-            {savedMeals.length > 4 && (
-              <PressBtn style={{ ...S.btnSec, width: "100%", marginTop: 10 }} onClick={() => setShowAllHistory(!showAllHistory)}>
-                {showAllHistory ? "Show less" : `See all ${savedMeals.length} meals`}
-              </PressBtn>
-            )}
-          </>
-        )}
-      </div>
-
       {/* DAILY HISTORY */}
       <div style={S.card}>
         <div style={S.cardTitle}>Daily score history</div>
@@ -1412,6 +1381,37 @@ export default function App() {
             </div>
           ))}
         </div>
+      </div>
+
+            {/* MEAL HISTORY */}
+            <div style={S.card}>
+        <div style={S.cardTitle}>Meal history</div>
+        <div style={S.cardSub}>All saved meals with date and score</div>
+        {savedMeals.length === 0 ? (
+          <div style={S.emptyBox}>No saved meals yet</div>
+        ) : (
+          <>
+            {(showAllHistory ? savedMeals : savedMeals.slice(0, 4)).map((meal) => (
+              <div key={meal.id} style={S.histItem}>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: "#111", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{meal.name}</div>
+                  <div style={{ fontSize: 11, color: "#aaa" }}>
+                    {meal.date} · <span style={{ color: scoreColor(meal.score), fontWeight: 600 }}>{meal.score} — {getDailyLabel(meal.score)}</span>
+                  </div>
+                </div>
+                <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
+                  <PressBtn style={S.btnLoad} onClick={() => loadMeal(meal)}>Load</PressBtn>
+                  <PressBtn style={S.btnDanger} onClick={() => deleteMeal(meal.id)}>Delete</PressBtn>
+                </div>
+              </div>
+            ))}
+            {savedMeals.length > 4 && (
+              <PressBtn style={{ ...S.btnSec, width: "100%", marginTop: 10 }} onClick={() => setShowAllHistory(!showAllHistory)}>
+                {showAllHistory ? "Show less" : `See all ${savedMeals.length} meals`}
+              </PressBtn>
+            )}
+          </>
+        )}
       </div>
 
       {/* FOOTER */}
